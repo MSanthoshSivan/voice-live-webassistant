@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Diagram - Azure VoiceLive Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1e1e1e;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #0078d4;
+        }
+        .architecture {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .layer {
+            background: #252526;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid;
+        }
+        .layer.frontend { border-left-color: #00a4ef; }
+        .layer.backend { border-left-color: #0078d4; }
+        .layer.azure { border-left-color: #ff8c00; }
+        .layer h2 {
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        .components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .component {
+            background: #2d2d30;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #3e3e42;
+        }
+        .component h3 {
+            margin: 0 0 10px 0;
+            font-size: 1em;
+            color: #4caf50;
+        }
+        .component ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 0.9em;
+            color: #cccccc;
+        }
+        .flow {
+            text-align: center;
+            color: #969696;
+            font-size: 2em;
+            margin: 10px 0;
+        }
+        .note {
+            background: #3e3e42;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #107c10;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ Azure VoiceLive Web Application Architecture</h1>
+        
+        <div class="architecture">
+            <!-- Frontend Layer -->
+            <div class="layer frontend">
+                <h2>🖥️ Frontend Layer (Browser)</h2>
+                <div class="components">
+                    <div class="component">
+                        <h3>index.html</h3>
+                        <ul>
+                            <li>Conversation panel</li>
+                            <li>Audio visualizers</li>
+                            <li>Function call display</li>
+                            <li>Status indicators</li>
+                        </ul>
+                    </div>
+                    <div class="component">
+                        <h3>styles.css</h3>
+                        <ul>
+                            <li>Dark theme</li>
+                            <li>Animations</li>
+                            <li>Responsive layout</li>
+                            <li>Custom components</li>
+                        </ul>
+                    </div>
+                    <div class="component">
+                        <h3>app.js</h3>
+                        <ul>
+                            <li>Socket.IO client</li>
+                            <li>Event handlers</li>
+                            <li>DOM updates</li>
+                            <li>Audio meters</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flow">⬇️ Socket.IO WebSocket ⬇️</div>
+            
+            <!-- Backend Layer -->
+            <div class="layer backend">
+                <h2>⚙️ Backend Layer (Python Flask)</h2>
+                <div class="components">
+                    <div class="component">
+                        <h3>Flask App</h3>
+                        <ul>
+                            <li>Web server</li>
+                            <li>REST API endpoints</li>
+                            <li>Template rendering</li>
+                            <li>Static file serving</li>
+                        </ul>
+                    </div>
+                    <div class="component">
+                        <h3>Flask-SocketIO</h3>
+                        <ul>
+                            <li>Real-time events</li>
+                            <li>Bidirectional comm</li>
+                            <li>Event broadcasting</li>
+                            <li>Connection handling</li>
+                        </ul>
+                    </div>
+                    <div class="component">
+                        <h3>WebVoiceAssistant</h3>
+                        <ul>
+                            <li>Session management</li>
+                            <li>Event processing</li>
+                            <li>Function calling</li>
+                            <li>Response handling</li>
+                        </ul>
+                    </div>
+                    <div class="component">
+                        <h3>AudioProcessor</h3>
+                        <ul>
+                            <li>PyAudio capture</li>
+                            <li>Audio playback</li>
+                            <li>Base64 encoding</li>
+                            <li>Thread management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flow">⬇️ Azure SDK WebSocket ⬇️</div>
+            
+            <!-- Azure Layer -->
+            <div class="layer azure">
+                <h2>☁️ Azure VoiceLive API</h2>
+                <div class="components">
+                    <div class="component">
+                        <h3>Speech Processing</h3>
+                        <ul>
+                            <li>Voice recognition</li>
+                            <li>Transcription</li>
+                            <li>Turn detection</li>
+                            <li>VAD processing</li>
+                        </ul>
+                    </div>
+                    <div class="component">
+                        <h3>GPT-4o Realtime</h3>
+                        <ul>
+                            <li>Intent analysis</li>
+                            <li>Response generation</li>
+                            <li>Function routing</li>
+                            <li>Context management</li>
+                        </ul>
+                    </div>
+                    <div class="component">
+                        <h3>TTS Engine</h3>
+                        <ul>
+                            <li>Neural voices</li>
+                            <li>Audio synthesis</li>
+                            <li>PCM16 output</li>
+                            <li>Streaming audio</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="note">
+            <h3>🔄 Data Flow</h3>
+            <p><strong>User Speech → Microphone → PyAudio → Base64 → Azure API → GPT-4o → TTS → Audio Stream → Speaker → User Hears Response</strong></p>
+            <p><strong>Parallel:</strong> All events broadcast via Socket.IO to update web UI in real-time</p>
+        </div>
+        
+        <div class="note">
+            <h3>🧵 Threading Model</h3>
+            <ul>
+                <li><strong>Main Thread:</strong> Flask web server</li>
+                <li><strong>Socket.IO Thread:</strong> WebSocket communication</li>
+                <li><strong>Event Loop Thread:</strong> AsyncIO for Azure SDK</li>
+                <li><strong>Audio Capture Thread:</strong> Microphone input</li>
+                <li><strong>Audio Send Thread:</strong> Upload to Azure</li>
+                <li><strong>Audio Playback Thread:</strong> Speaker output</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

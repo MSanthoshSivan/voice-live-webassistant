@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure VoiceLive Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎙️ Azure VoiceLive Assistant</h1>
+                <p class="subtitle">Real-time Voice AI with Function Calling</p>
+            </div>
+            <div class="header-status">
+                <span id="connection-status" class="status-badge disconnected">Not Running</span>
+                <button id="start-btn" class="btn btn-primary">Start Assistant</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel - Conversation -->
+            <div class="panel conversation-panel">
+                <div class="panel-header">
+                    <h2>💬 Conversation</h2>
+                    <button id="clear-conversation" class="btn btn-small">Clear</button>
+                </div>
+                <div class="panel-content">
+                    <div id="conversation-container" class="conversation-container">
+                        <div class="welcome-message">
+                            <h3>Welcome! 👋</h3>
+                            <p>Click "Start Assistant" to begin a voice conversation.</p>
+                            <div class="example-queries">
+                                <h4>Try asking:</h4>
+                                <ul>
+                                    <li>"What's the current time?"</li>
+                                    <li>"What's the weather in Seattle?"</li>
+                                    <li>"What time is it in UTC?"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Visualizations & Tools -->
+            <div class="right-column">
+                <!-- Audio Visualization -->
+                <div class="panel audio-panel">
+                    <div class="panel-header">
+                        <h2>🎵 Audio</h2>
+                        <span id="audio-status" class="status-text">Idle</span>
+                    </div>
+                    <div class="panel-content">
+                        <div class="audio-visualizer">
+                            <div class="audio-meter">
+                                <label>Input (Microphone)</label>
+                                <div class="meter-container">
+                                    <div id="input-meter" class="meter-bar"></div>
+                                </div>
+                            </div>
+                            <div class="audio-meter">
+                                <label>Output (Speaker)</label>
+                                <div class="meter-container">
+                                    <div id="output-meter" class="meter-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="speaking-indicator" class="speaking-indicator">
+                            <div class="pulse"></div>
+                            <span>Listening...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Function Calls -->
+                <div class="panel function-panel">
+                    <div class="panel-header">
+                        <h2>⚙️ Function Calls</h2>
+                        <span id="function-count" class="badge">0</span>
+                    </div>
+                    <div class="panel-content">
+                        <div id="function-container" class="function-container">
+                            <p class="empty-state">No function calls yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available Tools -->
+                <div class="panel tools-panel">
+                    <div class="panel-header">
+                        <h2>🔧 Available Tools</h2>
+                    </div>
+                    <div class="panel-content">
+                        <div id="tools-container" class="tools-container">
+                            <p class="empty-state">Loading tools...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">Session:</span>
+                <span id="session-id" class="status-value">Not started</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Last Activity:</span>
+                <span id="last-activity" class="status-value">—</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Messages:</span>
+                <span id="message-count" class="status-value">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <!-- Socket.IO Client Library - Load before app.js -->
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.5.4/dist/socket.io.min.js"></script>
+    
+    <!-- Main Application JavaScript -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
