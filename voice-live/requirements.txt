@@ -1,0 +1,11 @@
+azure-ai-voicelive[aiohttp]
+pyaudio
+python-dotenv
+azure-identity
+fastapi
+uvicorn[standard]
+websockets
+pydantic
+flask
+flask-socketio
+numpy
